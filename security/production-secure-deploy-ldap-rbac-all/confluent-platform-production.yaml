@@ -10,8 +10,6 @@ spec:
     init: confluentinc/confluent-init-container:2.6.0
   dataVolumeCapacity: 10Gi
   logVolumeCapacity: 10Gi
-  authentication:
-    type: digest
     jaasConfig:
       secretRef: credential
   tls:
@@ -38,12 +36,12 @@ spec:
           secretRef: credential
       tls:
         enabled: true
-#    external:
-#      externalAccess:
-#        type: nodePort
-#        nodePort:
-#          host: <host>
-#          nodePortOffset: 30000
+    external:
+      externalAccess:
+        type: nodePort
+        nodePort:
+          host: "*"
+          nodePortOffset: 30000
       authentication:
         type: ldap
         jaasConfig:
@@ -55,22 +53,11 @@ spec:
     superUsers:
     - User:kafka
   services:
-    kafkaRest:
-      externalAccess:
-        type: nodePort
-        nodePort:
-          host: <host>
-          nodePortOffset: 30100
     mds:
       tls:
         enabled: true
       tokenKeyPair:
         secretRef: mds-token
-      externalAccess:
-        type: nodePort
-        nodePort:
-          host: <host>
-          nodePortOffset: 30200
       provider:
         type: ldap
         ldap:
@@ -116,11 +103,6 @@ spec:
     init: confluentinc/confluent-init-container:2.6.0
   tls:
     secretRef: tls-group1
-  externalAccess:
-    type: nodePort
-    nodePort:
-      host: <host>
-      nodePortOffset: 30300
   authorization:
     type: rbac
   dependencies:
@@ -155,11 +137,6 @@ spec:
     init: confluentinc/confluent-init-container:2.6.0
   tls:
     secretRef: tls-group1
-  externalAccess:
-    type: nodePort
-    nodePort:
-      host: <host>
-      nodePortOffset: 30400
   authorization:
     type: rbac
   dependencies:
@@ -194,11 +171,6 @@ spec:
     init: confluentinc/confluent-init-container:2.6.0
   tls:
     secretRef: tls-group1
-  externalAccess:
-    type: nodePort
-    nodePort:
-      host: <host>
-      nodePortOffset: 30500
   authorization:
     type: rbac
   dependencies:
@@ -238,11 +210,6 @@ spec:
   dataVolumeCapacity: 10Gi
   authorization:
     type: rbac
-  externalAccess:
-    type: nodePort
-    nodePort:
-      host: <host>
-      nodePortOffset: 30600
   tls:
     secretRef: tls-group1
   dependencies:
@@ -284,11 +251,6 @@ spec:
   dataVolumeCapacity: 10Gi
   authorization:
     type: rbac
-#  externalAccess:
-#    type: nodePort
-#    nodePort:
-#      host: <host>
-#      nodePortOffset: 30700
   tls:
     secretRef: tls-group1
   dependencies:
