@@ -38,12 +38,12 @@ spec:
           secretRef: credential
       tls:
         enabled: true
-    external:
-      externalAccess:
-        type: nodePort
-        nodePort:
-          host: <host>
-          nodePortOffset: 30000
+#    external:
+#      externalAccess:
+#        type: nodePort
+#        nodePort:
+#          host: <host>
+#          nodePortOffset: 30000
       authentication:
         type: ldap
         jaasConfig:
@@ -284,11 +284,11 @@ spec:
   dataVolumeCapacity: 10Gi
   authorization:
     type: rbac
-  externalAccess:
-    type: nodePort
-    nodePort:
-      host: <host>
-      nodePortOffset: 30700
+#  externalAccess:
+#    type: nodePort
+#    nodePort:
+#      host: <host>
+#      nodePortOffset: 30700
   tls:
     secretRef: tls-group1
   dependencies:
