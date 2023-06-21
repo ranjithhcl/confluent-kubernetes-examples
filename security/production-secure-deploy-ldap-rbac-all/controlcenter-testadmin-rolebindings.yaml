@@ -4,7 +4,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ConfluentRolebinding
 metadata:
   name: testadmin-rb
-  namespace: confluent
+  namespace: cfk
 spec:
   principal:
     type: user
@@ -20,7 +20,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ConfluentRolebinding
 metadata:
   name: testadmin-rb-sr
-  namespace: confluent
+  namespace: cfk
 spec:
   principal:
     type: user
@@ -38,7 +38,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ConfluentRolebinding
 metadata:
   name: testadmin-rb-connect
-  namespace: confluent
+  namespace: cfk
 spec:
   principal:
     type: user
@@ -56,7 +56,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ConfluentRolebinding
 metadata:
   name: testadmin-rb-ksql
-  namespace: confluent
+  namespace: cfk
 spec:
   principal:
     type: user

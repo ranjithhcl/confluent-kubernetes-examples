@@ -4,11 +4,11 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ConfluentRolebinding
 metadata:
   name: ksqldb-0
-  namespace: confluent
+  namespace: cfk
 spec:
   # Cluster id is <namespace>..<ksql_cluster_name>_
   clustersScopeByIds:
-    ksqlClusterId: confluent.ksqldb_ 
+    ksqlClusterId: cfk.ksqldb_ 
   principal:
     name: ksql
     type: user

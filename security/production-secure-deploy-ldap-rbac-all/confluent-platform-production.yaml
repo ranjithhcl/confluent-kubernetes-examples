@@ -2,7 +2,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Zookeeper
 metadata:
   name: zookeeper
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 3
   image:
@@ -21,7 +21,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Kafka
 metadata:
   name: kafka
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 3
   image:
@@ -38,12 +38,12 @@ spec:
           secretRef: credential
       tls:
         enabled: true
-    external:
-      externalAccess:
-        type: nodePort
-        nodePort:
-          host: "*"
-          nodePortOffset: 30000
+#    external:
+#      externalAccess:
+#        type: nodePort
+#        nodePort:
+#          host: <host>
+#          nodePortOffset: 30000
       authentication:
         type: ldap
         jaasConfig:
@@ -97,7 +97,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Connect
 metadata:
   name: connect
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 2
   image:
@@ -131,7 +131,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: SchemaRegistry
 metadata:
   name: schemaregistry
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 1
   image:
@@ -165,7 +165,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: KafkaRestProxy
 metadata:
   name: kafkarestproxy
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 1
   image:
@@ -203,7 +203,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: KsqlDB
 metadata:
   name: ksqldb
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 2
   image:
@@ -238,7 +238,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ControlCenter
 metadata:
   name: controlcenter
-  namespace: confluent
+  namespace: cfk
 spec:
   replicas: 1
   podTemplate:
@@ -293,7 +293,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: KafkaRestClass
 metadata:
   name: default
-  namespace: confluent
+  namespace: cfk
 spec:
   kafkaRest:
     authentication:

@@ -4,7 +4,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ConfluentRolebinding
 metadata:
   name: connect-2
-  namespace: confluent
+  namespace: cfk
 spec:
   principal:
     name: connect
