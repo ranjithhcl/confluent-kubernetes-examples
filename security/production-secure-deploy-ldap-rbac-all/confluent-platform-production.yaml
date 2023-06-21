@@ -2,7 +2,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Zookeeper
 metadata:
   name: zookeeper
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 3
   image:
@@ -21,7 +21,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Kafka
 metadata:
   name: kafka
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 3
   image:
@@ -38,12 +38,6 @@ spec:
           secretRef: credential
       tls:
         enabled: true
-#    external:
-#      externalAccess:
-#        type: nodePort
-#        nodePort:
-#          host: <host>
-#          nodePortOffset: 30000
       authentication:
         type: ldap
         jaasConfig:
@@ -97,7 +91,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: Connect
 metadata:
   name: connect
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 2
   image:
@@ -131,7 +125,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: SchemaRegistry
 metadata:
   name: schemaregistry
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 1
   image:
@@ -165,7 +159,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: KafkaRestProxy
 metadata:
   name: kafkarestproxy
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 1
   image:
@@ -203,7 +197,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: KsqlDB
 metadata:
   name: ksqldb
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 2
   image:
@@ -238,7 +232,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: ControlCenter
 metadata:
   name: controlcenter
-  namespace: cfk
+  namespace: confluent
 spec:
   replicas: 1
   podTemplate:
@@ -255,6 +249,10 @@ spec:
     type: rbac
   tls:
     secretRef: tls-group1
+  externalAccess:
+    type: loadBalancer
+    loadBalancer:
+      domain: cluster.local
   dependencies:
     kafka:
       bootstrapEndpoint: kafka.confluent.svc.cluster.local:9071
@@ -293,7 +291,7 @@ apiVersion: platform.confluent.io/v1beta1
 kind: KafkaRestClass
 metadata:
   name: default
-  namespace: cfk
+  namespace: confluent
 spec:
   kafkaRest:
     authentication:
