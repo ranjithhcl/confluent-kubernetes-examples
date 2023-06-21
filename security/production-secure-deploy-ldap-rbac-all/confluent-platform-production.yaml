@@ -38,12 +38,6 @@ spec:
           secretRef: credential
       tls:
         enabled: true
-      authentication:
-        type: ldap
-        jaasConfig:
-          secretRef: credential
-      tls:
-        enabled: true
   authorization:
     type: rbac
     superUsers:
