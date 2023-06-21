@@ -38,12 +38,6 @@ spec:
           secretRef: credential
       tls:
         enabled: true
-    external:
-      externalAccess:
-        type: nodePort
-        nodePort:
-          host: "*"
-          nodePortOffset: 30000
       authentication:
         type: ldap
         jaasConfig:
