@@ -38,6 +38,20 @@ spec:
           secretRef: credential
       tls:
         enabled: true
+  configOverrides:
+    server:
+      - message.max.bytes=26214700
+      - default.replication.factor=3
+      - min.insync.replicas=1
+      - ldap.com.sun.jndi.ldap.read.timeout=60000
+      - confluent.balancer.enable=true
+      - ldap.java.naming.referral=follow
+      - ldap.search.mode=GROUPS
+      - confluent.metrics.reporter.bootstrap.servers=kafka-0.kafka.confluent.svc.cluster.local:9072,kafka-1.kafka.confluent.svc.cluster.local:9071,kafka-2.kafka.confluent.svc.cluster.local:9071
+      - confluent.metrics.reporter.topic.max.message.bytes=10485760
+      - confluent.metrics.reporter.topic.partitions=12
+      - confluent.metrics.reporter.topic.create=true
+      - confluent.metrics.reporter.topic=_confluent-metrics
   authorization:
     type: rbac
     superUsers:
@@ -58,14 +72,16 @@ spec:
               secretRef: credential
           configurations:
             groupNameAttribute: cn
-            groupObjectClass: group
-            groupMemberAttribute: member
+            groupObjectClass: posixGroup
+            groupSearchScope: 2
+            groupMemberAttribute: memberUid
             groupMemberAttributePattern: CN=(.*),DC=test,DC=com
-            groupSearchBase: dc=test,dc=com
+            groupSearchBase: ou=groups,dc=test,dc=com
             userNameAttribute: cn
             userMemberOfAttributePattern: CN=(.*),DC=test,DC=com
-            userObjectClass: organizationalRole
+            userObjectClass: "*"
             userSearchBase: dc=test,dc=com
+            userSearchScope: 2
   dependencies:
     kafkaRest:
       authentication:
