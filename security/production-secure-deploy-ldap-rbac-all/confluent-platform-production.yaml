@@ -249,6 +249,10 @@ spec:
     type: rbac
   tls:
     secretRef: tls-group1
+  externalAccess:
+    type: loadBalancer
+    loadBalancer:
+      domain: cluster.local
   dependencies:
     kafka:
       bootstrapEndpoint: kafka.confluent.svc.cluster.local:9071
