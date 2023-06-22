@@ -23,7 +23,7 @@ metadata:
   name: kafka
   namespace: confluent
 spec:
-  replicas: 3
+  replicas: 1
   image:
     application: confluentinc/cp-server:7.4.0
     init: confluentinc/confluent-init-container:2.6.0
@@ -37,13 +37,14 @@ spec:
       - confluent.balancer.enable=true
       - ldap.java.naming.referral=follow
       - ldap.search.mode=GROUPS
-      - confluent.metrics.reporter.bootstrap.servers=kafka-0.kafka.confluent.svc.cluster.local:9072,kafka-1.kafka.confluent.svc.cluster.local:9071,kafka-2.kafka.confluent.svc.cluster.local:9071
+      - confluent.metrics.reporter.bootstrap.servers=kafka-0.kafka.confluent.svc.cluster.local:9072
       - confluent.metrics.reporter.topic.max.message.bytes=10485760
       - metric.reporters=io.confluent.metrics.reporter.ConfluentMetricsReporter
       - confluent.metrics.reporter.topic.partitions=12
       - confluent.metrics.reporter.topic.create=true
       - confluent.metrics.reporter.topic=_confluent-metrics
-#      - state.dir=/mnt/data/data1
+      - state.dir=/mnt/data/data0/data1
+      - log.dirs=/mnt/data/data0/data1/logs
   tls:
     secretRef: tls-group1
   listeners:
@@ -259,7 +260,7 @@ spec:
   dataVolumeCapacity: 10Gi
   configOverrides:
     server:
-        - confluent.controlcenter.kafka.cfk.bootstrap.servers=kafka.cfk.svc.cluster.local:9092
+        - confluent.controlcenter.kafka.cfk.bootstrap.servers=.kafka.cfk.svc.cluster.local:9092
         - confluent.controlcenter.kafka.cfk.security.protocol=SASL_SSL
         - confluent.controlcenter.kafka.cfk.metadata.bootstrap.server.urls=https://kafka.cfk.svc.cluster.local:8090
         - confluent.controlcenter.kafka.cfk.metadata.basic.auth.user.info=${file:/mnt/secrets/c3-mds-client/bearer.txt:username}:${file:/mnt/secrets/c3-mds-client/bearer.txt:password}
@@ -276,6 +277,25 @@ spec:
         - confluent.controlcenter.kafka.cfk.rest.ssl.keystore.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
         - confluent.controlcenter.kafka.cfk.rest.ssl.truststore.location=/mnt/cfk/sslcerts/truststore.p12
         - confluent.controlcenter.kafka.cfk.rest.ssl.truststore.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
+        - confluent.controlcenter.kafka.cfk.internal.topics.partitions=12
+        - confluent.controlcenter.kafka.cfk.internal.topics.replication=3
+        - confluent.controlcenter.kafka.confluent.bootstrap.servers=kafka.confluent.svc.cluster.local:9092
+        - confluent.controlcenter.kafka.confluent.security.protocol=SASL_SSL
+        - confluent.controlcenter.kafka.confluent.metadata.bootstrap.server.urls=https://kafka.confluent.svc.cluster.local:8090
+        - confluent.controlcenter.kafka.confluent.metadata.basic.auth.user.info=${file:/mnt/secrets/c3-mds-client/bearer.txt:username}:${file:/mnt/secrets/c3-mds-client/bearer.txt:password}
+        - confluent.controlcenter.kafka.confluent.metadata.username=c3
+        - confluent.controlcenter.kafka.confluent.metadata.password=c3-secret
+        - confluent.controlcenter.kafka.confluent.streams.security.protocol=SASL_SSL
+        - confluent.controlcenter.kafka.confluent.data.dir=/mnt/data/data1
+        - confluent.controlcenter.kafka.confluent.rest.authentication.method=BEARER
+        - confluent.controlcenter.kafka.confluent.rest.authentication.skip.paths=/2.0/status/app_info
+        - confluent.controlcenter.kafka.confluent.listeners=https://kafka.confluent.svc.cluster.local:9021
+        - confluent.controlcenter.kafka.confluent.rest.ssl.enabled.protocols=TLSv1.2
+        - confluent.controlcenter.kafka.confluent.key.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
+        - confluent.controlcenter.kafka.confluent.rest.ssl.keystore.location=/mnt/sslcerts/keystore.p12
+        - confluent.controlcenter.kafka.confluent.rest.ssl.keystore.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
+        - confluent.controlcenter.kafka.confluent.rest.ssl.truststore.location=/mnt/sslcerts/truststore.p12
+        - confluent.controlcenter.kafka.confluent.rest.ssl.truststore.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
 #       - bootstrap.servers=kafka.confluent.svc.cluster.local:9073
 #       - confluent.monitoring.interceptor.bootstrap.servers=kafka.cfk.svc.cluster.local:9092
 #       - confluent.controlcenter.internal.topics.partitions=12
