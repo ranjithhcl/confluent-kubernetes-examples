@@ -257,14 +257,24 @@ spec:
   dataVolumeCapacity: 10Gi
   configOverrides:
     server:
-      - bootstrap.servers=kafka.confluent.svc.cluster.local:9073,kafka.cfk.svc.cluster.local:9073
-      - confluent.controlcenter.connect.connect.cluster=https://connect.confluent.svc.cluster.local:8083,https://connect.cfk.svc.cluster.local:8083
-      - confluent.controlcenter.ksql.ksqldb.advertised.url=https://ksqldb.confluent.svc.cluster.local:8088,https://ksqldb.cfk.svc.cluster.local:8088
-      - confluent.controlcenter.ksql.ksqldb.url=https://ksqldb.confluent.svc.cluster.local:8088,https://ksqldb.cfk.svc.cluster.local:8088
-      - confluent.controlcenter.schema.registry.url=https://schemaregistry.confluent.svc.cluster.local:8081,https://schemaregistry.cfk.svc.cluster.local:8081
-      - confluent.controlcenter.streams.cprest.url=https://kafka.confluent.svc.cluster.local:8090,https://kafka.cfk.svc.cluster.local:8090
-      - confluent.controlcenter.streams.sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required metadataServerUrls="https://kafka.cfk.svc.cluster.local:8090" ,username="${file:/mnt/secrets/c3-mds-client/bearer.txt:username}" password="${file:/mnt/secrets/c3-mds-client/bearer.txt:password}";
-      - confluent.metadata.bootstrap.server.urls=https://kafka.confluent.svc.cluster.local:8090,https://kafka.cfk.svc.cluster.local:8090
+       - bootstrap.servers=kafka.confluent.svc.cluster.local:9073
+       - confluent.monitoring.interceptor.bootstrap.servers=kafka.cfk.svc.cluster.local:9092
+#       - confluent.controlcenter.internal.topics.partitions=12
+#       - confluent.controlcenter.internal.topics.replication=3
+#       - confluent.controlcenter.connect.connect.cluster=https://connect.confluent.svc.cluster.local:8083,https://connect.cfk.svc.cluster.local:8083
+#       - confluent.controlcenter.ksql.ksqldb.advertised.url=https://ksqldb.confluent.svc.cluster.local:8088,https://ksqldb.cfk.svc.cluster.local:8088
+#       - confluent.controlcenter.ksql.ksqldb.url=https://ksqldb.confluent.svc.cluster.local:8088,https://ksqldb.cfk.svc.cluster.local:8088
+#       - confluent.controlcenter.schema.registry.url=https://schemaregistry.confluent.svc.cluster.local:8081,https://schemaregistry.cfk.svc.cluster.local:8081
+#       - confluent.controlcenter.streams.cprest.url=https://kafka.confluent.svc.cluster.local:8090,https://kafka.cfk.svc.cluster.local:8090
+#       - confluent.controlcenter.streams.sasl.jaas.config=org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required metadataServerUrls="https://kafka.cfk.svc.cluster.local:8090" ,username="${file:/mnt/secrets/c3-mds-client/bearer.txt:username}" password="${file:/mnt/secrets/c3-mds-client/bearer.txt:password}";
+#       - confluent.metadata.bootstrap.server.urls=https://kafka.confluent.svc.cluster.local:8090,https://kafka.cfk.svc.cluster.local:8090
+#       - confluent.controlcenter.kafka.confluent.bootstrap.servers=kafka.confluent.svc.cluster.local:9073
+#       - confluent.controlcenter.kafka.kafka.bootstrap.servers=kafka.cfk.svc.cluster.local:9073
+#       - confluent.controlcenter.connect.confluent.cluster=https://connect.confluent.svc.cluster.local:8083
+#       - confluent.controlcenter.connect.cfk.cluster=https://connect.cfk.svc.cluster.local:8083
+#       - confluent.controlcenter.schema.registry.url=https://schemaregistry.confluent.svc.cluster.local:8081
+#       - confluent.controlcenter.internal.topics.replication=3
+#       - confluent.monitoring.interceptor.topic.partitions=12
   authorization:
     type: rbac
   tls:
