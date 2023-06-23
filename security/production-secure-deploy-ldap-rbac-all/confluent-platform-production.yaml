@@ -53,8 +53,8 @@ spec:
       - confluent.metrics.reporter.topic.partitions=12
       - confluent.metrics.reporter.topic.create=true
       - confluent.metrics.reporter.topic=_confluent-metrics
-      - state.dir=/mnt/data/data0/data1
-      - log.dirs=/mnt/data/data0/data1/logs
+ #     - state.dir=/mnt/data/data0/data1
+ #     - log.dirs=/mnt/data/data0/data1/logs
   authorization:
     type: rbac
     superUsers:
@@ -267,7 +267,7 @@ spec:
         - confluent.controlcenter.kafka.cfk.metadata.username=c3
         - confluent.controlcenter.kafka.cfk.metadata.password=c3-secret
         - confluent.controlcenter.kafka.cfk.streams.security.protocol=SASL_SSL
-        - confluent.controlcenter.kafka.cfk.data.dir=/mnt/data/data1
+#        - confluent.controlcenter.kafka.cfk.data.dir=/mnt/data/data1
         - confluent.controlcenter.kafka.cfk.rest.authentication.method=BEARER
         - confluent.controlcenter.kafka.cfk.rest.authentication.skip.paths=/2.0/status/app_info
         - confluent.controlcenter.kafka.cfk.listeners=https://kafka.cfk.svc.cluster.local:9021
