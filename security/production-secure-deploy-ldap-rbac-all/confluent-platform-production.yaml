@@ -277,8 +277,8 @@ spec:
         - confluent.controlcenter.kafka.cfk.rest.ssl.keystore.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
         - confluent.controlcenter.kafka.cfk.rest.ssl.truststore.location=/mnt/cfk/sslcerts/truststore.p12
         - confluent.controlcenter.kafka.cfk.rest.ssl.truststore.password=${file:/mnt/sslcerts/jksPassword.txt:jksPassword}
-        - confluent.controlcenter.kafka.cfk.internal.topics.partitions=12
-        - confluent.controlcenter.kafka.cfk.internal.topics.replication=3
+#        - confluent.controlcenter.kafka.cfk.internal.topics.partitions=12
+#        - confluent.controlcenter.kafka.cfk.internal.topics.replication=3
 #        - confluent.controlcenter.kafka.confluent.bootstrap.servers=kafka.confluent.svc.cluster.local:9092
 #        - confluent.controlcenter.kafka.confluent.security.protocol=SASL_SSL
 #        - confluent.controlcenter.kafka.confluent.metadata.bootstrap.server.urls=https://kafka.confluent.svc.cluster.local:8090
