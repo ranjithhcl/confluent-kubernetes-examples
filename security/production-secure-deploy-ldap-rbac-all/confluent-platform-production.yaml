@@ -260,7 +260,7 @@ spec:
   dataVolumeCapacity: 10Gi
   configOverrides:
     server:
-        - confluent.controlcenter.kafka.cfk.bootstrap.servers=kafka.cfk.svc.cluster.local:9092
+        - confluent.controlcenter.kafka.cfk.bootstrap.servers=kafka-0.kafka.cfk.svc.cluster.local:9092,kafka-1.kafka.cfk.svc.cluster.local,kafka-2.kafka.cfk.svc.cluster.local
         - confluent.controlcenter.kafka.cfk.controlcenter.id=1
         - confluent.controlcenter.kafka.cfk.security.protocol=SASL_SSL
         - confluent.controlcenter.kafka.cfk.metadata.bootstrap.server.urls=https://kafka.cfk.svc.cluster.local:8090
