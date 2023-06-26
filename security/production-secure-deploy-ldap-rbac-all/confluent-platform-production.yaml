@@ -52,6 +52,8 @@ spec:
 #      - confluent.metrics.reporter.topic.partitions=12
 #      - confluent.metrics.reporter.topic.create=true
 #      - confluent.metrics.reporter.topic=_confluent-metrics
+      - state.dir=/mnt/data/data0/1
+      - log.dirs=/mnt/data/data0/1/logs
   authorization:
     type: rbac
     superUsers:
